@@ -11,6 +11,7 @@ import Data.Monoid
 import qualified Data.Text.IO as T
 import qualified System.IO as SI
 import System.Directory (listDirectory)
+
 main :: IO ()
 main = S.scotty 3000 $ do 
     S.get "/" $ do
@@ -20,11 +21,11 @@ main = S.scotty 3000 $ do
         H.body $ do
           H.h1 "My Blog"
                     
-          showLinks $ ["post1", "post2"]
+          showLinks $ ["text/2", "text1/1"]
 
     S.get "/:title" $ do
       title <- param "title"
-      file title        
+      file $ "Pieces/" ++ title  
 
 showLinks :: [H.AttributeValue] -> H.Markup  
 showLinks [] = error "empty list"
@@ -35,5 +36,6 @@ showLinks (x:xs) = do
  
 sortLinks :: [String] -> [String]
 sortLinks [] = error "empty list"
+
 
        

@@ -21,9 +21,9 @@ main = S.scotty 3000 $ do
         H.body $ do
           topBar
           H.h1 "My Blog"
-          showLinks $ ["Pieces/Article1", "Pieces/Article2"]
+          showLinks $ ["/Pieces/Article1", "/Pieces/Article2"]
 
-    S.get "Pieces/:title" $ do
+    S.get "/Pieces/:title" $ do
       --title <- param "title"
       --file $ "Pieces/" ++ title
       S.html . R.renderHtml $ do
@@ -54,17 +54,17 @@ topBar :: H.Html
 topBar = H.div H.! class_ "container" $ do
            H.a H.! href("/") $ do
              H.button H.! type_ "button" $ "Home" 
-           H.a H.! href("/newPost") $ do
+           H.a H.! href("/login") $ do
              H.button H.! type_ "button" $ "New Post"  
 
 login :: H.Html
 login = do  
              H.h1 "Login"
              H.form H.! Text.Blaze.Html5.Attributes.id "pw" $ "Password (It's Wew)"
-             H.input H.! type_ "text"
+             H.input H.! type_ "password" H.! name "password" 
              H.button H.! onclick "checkPW()" $ "Click!"
              H.h2 H.! Text.Blaze.Html5.Attributes.id "out" $ ""
-             H.script $ "function checkPW() { var x = documents.getElementById('pw'); var text = x.elements[0].value; document.getElementById('out').innerHTML = text; }" 
+             H.script $ "function checkPW() { var x = document.getElementById('pw'); var text = x.elements[0].value; document.getElementById('out').innerHTML = text; }" 
 
 
 

@@ -36,7 +36,10 @@ main = S.scotty 3000 $ do
           H.title "An Atricle"
         H.body $ do
           topBar
-      S.html $ file title
+          H.div $ do
+            H.object H.! data_ ("Pieces/Article1") $ ""
+
+    
     S.get "/login" $ do
       S.html . R.renderHtml $ do
         H.head $ 
